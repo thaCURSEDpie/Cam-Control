@@ -884,7 +884,6 @@ namespace cameras
                         customCam.Position = Game.CurrentCamera.Position;
                         customCam.Direction = Game.CurrentCamera.Direction;
                         customCam.isActive = true;
-                        Player.CanControlCharacter = false;
 
                         camY = customCam.Position.Y;
                         camX = customCam.Position.X;
@@ -969,7 +968,6 @@ namespace cameras
                         Player.Character.GravityMultiplier = 1.0f;
 
                         customCam.isActive = false;
-                        Player.CanControlCharacter = true;
                         Game.Console.Print("Custom cam OFF");
                     }
                 }
