@@ -1,5 +1,5 @@
-﻿/**********************************************/
-/*      file:           processing.cs
+/**********************************************/
+/*      file:           main.cs
  *      part of:        Camera-Control Mod
  *      author:         thaCURSEDpie
  *      creation date:  2010-05-15
@@ -13,14 +13,10 @@
 /*
 /**********************************************/
 
-
-#define DEBUG
-
 using System;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Linq;
 using System.Text;
 using System.Media;
 using GTA;
@@ -698,7 +694,6 @@ namespace cameras
                 }
                 updateCamInfo();
                 Player.WantedLevel = 0;
-                Player.CanControlCharacter = false;
                 // Player.Character.Position = new Vector3(customCam.Position.X - 2 * camHeX, customCam.Position.Y - 2 * camHeY, customCam.Position.Z - 2 * camHeZ);
 #if DEBUG
                 //Game.Console.Print(GTA.Native.Function.Call<bool>("DOES_OBJECT_HAVE_PHYSICS", cameraObj).ToString());
@@ -851,7 +846,6 @@ namespace cameras
                     if (!isAdjustingCarCamPosition)
                     {
                         customCarCam_offsPos = Player.Character.CurrentVehicle.GetOffset(customCarCam.Position);
-                        Player.CanControlCharacter = true;
 
                         customCarCam_headingDiff = customCarCam.Heading - Player.Character.CurrentVehicle.Heading;
                         customCarCam_directionDiff.X = -Player.Character.CurrentVehicle.Direction.X + customCarCam.Direction.X;
@@ -868,7 +862,6 @@ namespace cameras
                         camHeX = customCarCam.Direction.X;
                         camHeY = customCarCam.Direction.Y;
                         camHeZ = customCarCam.Direction.Z;
-                        Player.CanControlCharacter = false;
                     }
 
                 }
@@ -880,7 +873,6 @@ namespace cameras
                     customCamEnabled = !customCamEnabled;
                     if (customCamEnabled)
                     {
-                        
                         customCam.Position = Game.CurrentCamera.Position;
                         customCam.Direction = Game.CurrentCamera.Direction;
                         customCam.isActive = true;
@@ -906,7 +898,6 @@ namespace cameras
                         GTA.Native.Function.Call("DISPLAY_RADAR", false);
                         Player.Character.Invincible = true;
                         Player.IgnoredByEveryone = true;
-                        Player.Character.BlockGestures = true;
                         startPoint = Player.Character.Position;
 
                         GTA.Native.Function.Call("CAN_PHONE_BE_SEEN_ON_SCREEN", false);
@@ -963,7 +954,6 @@ namespace cameras
                         //Player.Character.Visible = true;
                         Player.Character.Invincible = false;
                         Player.IgnoredByEveryone = false;
-                        Player.Character.BlockGestures = false;
                         Player.Character.Position = startPoint;
                         Player.Character.GravityMultiplier = 1.0f;
 
@@ -1015,7 +1005,6 @@ namespace cameras
                     }
                     else
                     {
-                        Player.CanControlCharacter = true;
                         customCarCam.isActive = false;
                         Game.Console.Print("Custom car cam OFF");
                     }
